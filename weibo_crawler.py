@@ -22,22 +22,18 @@ requset_url = "http://weibo.com/p/aj/v6/mblog/mbloglist?"
 
 cookie_save_file = "cookie.txt"#存cookie的文件名
 cookie_update_time_file = "cookie_timestamp.txt"#存cookie时间戳的文件名
-image_result_file = "image_result.md"#存图片结果的文件名
-
+# image_result_file = "image_result.md"#存图片结果的文件名
+image_result_file = "image_result.html" #html文件
 
 # username = 'your weibo accounts'##你的微博账号
 # password = 'your weibo password'##你的微博密码
 username = '179023084@qq.com'
 password = 'chenqy'
 
-person_site_name = "durexinchina"#想爬取的微博号的个性域名 无个性域名则换成: u/+"微博id" 如 u/12345678
-weibo_id = "1942473263"#微博id可以在网页端打开微博，显示网页源代码，找到关键词$CONFIG['oid']='1837498771'; 
-page_size = 7#你要爬取的微博的页数
+person_site_name = "zesenwu"#想爬取的微博号的个性域名 无个性域名则换成: u/+"微博id" 如 u/12345678
+weibo_id = "1649577413"#微博id可以在网页端打开微博，显示网页源代码，找到关键词$CONFIG['oid']='1837498771'; 
+page_size = 3#你要爬取的微博的页数
 current_page = 1
-
-
-
-
 
 
 headers = {#User-Agent需要根据每个人的电脑来修改
@@ -49,7 +45,7 @@ headers = {#User-Agent需要根据每个人的电脑来修改
 		'Content-Type':'application/x-www-form-urlencoded',
 		'Host':'weibo.com',
 		'Pragma':'no-cache',
-		'Referer':'http://weibo.com/u/1942473263?profile_ftype=1&is_all=1',
+		'Referer':'http://weibo.com/u/'+weibo_id+'?profile_ftype=1&is_all=1',
 		'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36',
 		'X-Requested-With':'XMLHttpRequest'
         }
@@ -132,7 +128,9 @@ def write_image_urls(image_list):
     	f= open(image_result_file,'a+')
         for x in xrange(len(image_list)):
         	image = image_list[x]
-        	show_image = "![]("+image+")"
+        	# show_image = "![]("+image+")"
+        	# html文件
+        	show_image = '<img src="'+image+'">'
         	f.write(show_image.encode("utf-8"))
         	f.write('\n')
         f.close()
